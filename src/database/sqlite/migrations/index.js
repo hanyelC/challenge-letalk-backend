@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const sqliteConnection = require("../index")
+const { sqliteConnection } = require("../index")
 
 const createLoan = fs.readFileSync('./createLoan.sql').toString()
 
