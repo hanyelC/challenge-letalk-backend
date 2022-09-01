@@ -1,10 +1,14 @@
 const { SimulateLoanService } = require('../services/SimulateLoanService')
 const { CreateLoanService } = require('../services/CreateLoanService')
+const { LoanRepository } = require('../repositories/LoanRepository')
 
 class LoanController {
   async index(req, res) {
-    // get all loans from DB
-    return res.send('Hello world')
+    const repository = new LoanRepository()
+
+    const loans = await repository.index()
+
+    return res.json(loans)
   }
 
   async simulate(req, res) {
@@ -20,7 +24,8 @@ class LoanController {
   async create(req, res) {
     const { cpf, UF, birth_date, total_value, monthly_payment_value } = req.body
 
-    const createLoanService = new CreateLoanService()
+    const repository = new LoanRepository()
+    const createLoanService = new CreateLoanService(repository)
 
     await createLoanService.execute(cpf, UF, birth_date, total_value, monthly_payment_value)
 
