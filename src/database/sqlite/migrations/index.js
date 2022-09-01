@@ -1,8 +1,13 @@
 const fs = require('fs')
+const path = require('path')
 
-const { sqliteConnection } = require("../index")
+const { sqliteConnection } = require('../index')
 
-const createLoan = fs.readFileSync('./createLoan.sql').toString()
+const createLoan = fs.readFileSync(path.resolve('src', 'database', 'sqlite', 'migrations', 'createLoan.sql')).toString()
+
+/**
+ * Runs the migrations on database to create the tables
+ */
 
 async function migrationsRun() {
   const schemas = [
