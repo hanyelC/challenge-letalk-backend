@@ -1,3 +1,5 @@
+const { SimulateLoanService } = require('../services/SimulateLoanService')
+
 class LoanController {
   async index(req, res) {
     // get all loans from DB
@@ -5,9 +7,15 @@ class LoanController {
   }
 
   async simulate(req, res) {
-    // simulate a loan
+    const { total_value, UF, monthly_payment_value } = req.body
+
+    const simulateLoanService = new SimulateLoanService()
+
+    const loanSimulation = simulateLoanService.execute(total_value, UF, monthly_payment_value)
+
+    return res.json(loanSimulation)
   }
-  
+
   async create(req, res) {
     // create a loan
   }
