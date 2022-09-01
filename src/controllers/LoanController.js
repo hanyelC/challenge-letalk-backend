@@ -22,9 +22,9 @@ class LoanController {
 
     const createLoanService = new CreateLoanService()
 
-    const a = createLoanService.execute(cpf, UF, birth_date, total_value, monthly_payment_value)
+    await createLoanService.execute(cpf, UF, birth_date, total_value, monthly_payment_value)
 
-    return res.send()
+    return res.status(201).send()
   }
 }
 
