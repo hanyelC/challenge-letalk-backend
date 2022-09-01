@@ -15,7 +15,6 @@ class LoanRepository {
     const id = randomUUID()
     const db = await sqliteConnection()
 
-    console.log(cpf)
     await db.run(`INSERT INTO loan (
       id,
       cpf,
