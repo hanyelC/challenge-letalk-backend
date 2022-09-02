@@ -8,6 +8,13 @@ class SimulateLoanService {
     ES: (value) => { return (value * 111) / 10000 }      //ES	1, 11 %
   })
 
+  feePercentage = {
+    'MG': 1,
+    'SP': 0.8,
+    'RJ': 0.9,
+    'ES': 1.11
+  }
+
   calculateMonthFee(installments, value, calculateFeeCB, monthlyPaymentValue, date) {
     const installment = {}
 
@@ -66,7 +73,19 @@ class SimulateLoanService {
 
     const installments = this.calculateMonthFee([], totalValue, this.fees[UF], monthlyPaymentValue, date)
 
-    return installments
+    const totalFee = installments.reduce((total, item) => {
+      return total + item.fee
+    }, 0)
+
+    const loanData = {
+      feePercentual: this.feePercentage[UF],
+      totalFee: Number(totalFee.toFixed(2)),
+      installments,
+      value: totalValue,
+      totalValue: totalValue + totalFee 
+    }
+
+    return loanData
   }
 }
 
