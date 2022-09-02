@@ -62,7 +62,7 @@ class SimulateLoanService {
       throw new AppError('Invalid UF')
     }
 
-    const isFeeGreaterThanMonthlyPaymentValue = Number(this.fees[UF](totalValue)).toFixed(2) > monthlyPaymentValue
+    const isFeeGreaterThanMonthlyPaymentValue = Number(this.fees[UF](totalValue)).toFixed(2) >= monthlyPaymentValue
 
     if (isFeeGreaterThanMonthlyPaymentValue) {
       throw new AppError('Monthly installment value must be greater than the monthly fee')
@@ -82,7 +82,7 @@ class SimulateLoanService {
       totalFee: Number(totalFee.toFixed(2)),
       installments,
       value: totalValue,
-      totalValue: totalValue + totalFee 
+      totalValue: totalValue + totalFee
     }
 
     return loanData

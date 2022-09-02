@@ -36,7 +36,7 @@ class CreateLoanService {
       throw new AppError('Invalid UF')
     }
 
-    const isFeeGreaterThanMonthlyPaymentValue = Number(this.fees[UF](totalValue)).toFixed(2) > monthlyPaymentValue
+    const isFeeGreaterThanMonthlyPaymentValue = Number(this.fees[UF](totalValue)).toFixed(2) >= monthlyPaymentValue
 
     if (isFeeGreaterThanMonthlyPaymentValue) {
       throw new AppError('Monthly installment value must be greater than the monthly fee')
